@@ -17,6 +17,10 @@ steps:
     inputs:
       version: "$(dotnetSdkVersion)"
 
+  - task: NuGetToolInstaller@0
+    inputs:
+      versionSpec: "5.9.1"
+
   - task: Npm@1
     displayName: "Run npm install"
     inputs:
@@ -36,7 +40,9 @@ steps:
     displayName: "Restore project dependencies"
     inputs:
       command: "restore"
-      projects: "**/*.csproj"
+      restoreSolution: "**/*.sln"
+      feedsToUse: "select"
+      vstsFeed: "$(System.TeamProject)/Tailspin.SpaceGame.Web.Models"
 
   - template: templates/build.yml
     parameters:
