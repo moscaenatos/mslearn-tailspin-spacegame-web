@@ -51,10 +51,10 @@ namespace TailSpin.SpaceGame.Web
         /// <param name="page">The 1-based page of results to return.</param>
         /// <param name="pageSize">The number of items on a page.</param>
         public Task<IEnumerable<T>> GetItemsAsync(
-            Func<T, bool> queryPredicate,
-            Func<T, int> orderDescendingPredicate,
-            int page = 1, int pageSize = 10
-        )
+     Func<T, bool> queryPredicate,
+     Func<T, int> orderDescendingPredicate,
+     int page = 1, int pageSize = 10
+ )
         {
             var result = _items
                 .Where(queryPredicate) // filter
