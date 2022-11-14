@@ -69,3 +69,23 @@ stages:
           - task: PublishBuildArtifacts@1
             displayName: "Publish Artifact: drop"
             condition: succeeded()
+
+  - stage: "Deploy"
+    displayName: "Deploy the web application"
+    dependsOn: Build
+    jobs:
+      - deployment: Deploy
+        pool:
+          vmImage: "ubuntu-20.04"
+        environment: dev
+        variables:
+          - group: Release
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: current
+                  artifact: drop
+                - template: templates/deploy.yml
+                  parameters:
+                    buildConfiguration: "Release"
