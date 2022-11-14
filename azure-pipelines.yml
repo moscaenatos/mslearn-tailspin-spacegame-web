@@ -80,6 +80,7 @@ stages:
         environment: dev
         variables:
           - group: Release
+          - packageName: Tailspin.SpaceGame.Web.zip
         strategy:
           runOnce:
             deploy:
@@ -91,4 +92,4 @@ stages:
                   inputs:
                     azureSubscription: "Resource Manager - Tailspin - Space Game"
                     appName: "$(WebAppName)"
-                    package: "$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip"
+                    package: "$(Pipeline.Workspace)/drop/$(buildConfiguration)/$(packageName)"
