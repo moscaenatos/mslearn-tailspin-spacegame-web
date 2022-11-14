@@ -80,7 +80,8 @@ stages:
         environment: dev
         variables:
           - group: Release
-          - packageName: Tailspin.SpaceGame.Web.zip
+          - name: packageName
+            value: "Tailspin.SpaceGame.Web.zip"
         strategy:
           runOnce:
             deploy:
